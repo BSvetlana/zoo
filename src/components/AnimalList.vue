@@ -13,7 +13,8 @@
                 <tr v-for="(animal, index) in animals" :key="index">
                     <td>{{ animal.kind }}</td>
                     <td>{{ animal.name }}</td>
-                    <td>{{ animal.dateOfBrth }}</td>
+                    <td  v-if="animal.dateOfBrth === ''">Nepoznat</td>
+                    <td v-else>{{ animal.dateOfBrth }}</td>
                 </tr>
                 </tbody>
             </table>
@@ -32,10 +33,15 @@
                     {kind: 'dog', name: 'Leo', dateOfBrth: 2016-10-18},
                     {kind: 'mouse', name: 'Miki', dateOfBrth: ''},
                     {kind: 'fish', name: 'Bub', dateOfBrth: 2014-10-18},
-                ]
+                ],
+                seen(){
+                    this.animal.dateOfBrth = 'Nepoznat';
+                }
             }
+
         }
     }
+
 </script>
 
 <style scoped>
