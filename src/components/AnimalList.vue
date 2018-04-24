@@ -1,5 +1,22 @@
 <template>
     <div class="w-100 p-3">
+        <div class="col-sm-auto">
+            <form @submit.prevent = "addAnimal">
+                <div class="form-group">
+                    <label for="kind">Animal</label>
+                    <input type="text" class="form-control" id="kind" placeholder="Animal..." v-model="newAnimal.kind">
+                </div>
+                <div class="form-group">
+                    <label for="name">Animal Name</label>
+                    <input type="text" class="form-control" id="name" placeholder="Animal Name..." v-model="newAnimal.name">
+                </div>
+                <div class="form-group">
+                    <label for="dateOfBrth">Email address</label>
+                    <input type="number" class="form-control" id="dateOfBrth" aria-describedby="emailHelp" placeholder="Date of birth..." v-model="newAnimal.dateOfBrth">
+                </div>
+                <button type="submit" class="btn btn-secondary btn-sm">Add Animal</button>
+            </form>
+        </div>
         <div class="col-md-auto">
             <table class="table">
                 <thead class="bg-secondary text-white">
@@ -39,6 +56,11 @@
                     {kind: 'mouse', name: 'Miki', dateOfBrth: ''},
                     {kind: 'fish', name: 'Bub', dateOfBrth: 2014-10-18},
                 ],
+                newAnimal:{
+                    kind: '',
+                    name: '',
+                    dateOfBrth: ''
+                },
                 seen(){
                     this.animal.dateOfBrth = 'Nepoznat';
                 }
@@ -53,6 +75,10 @@
 
                 this.animals.splice(this.animals.indexOf(animal),1);
                 this.animals.unshift(animal);
+            },
+            addAnimal(){
+                this.animals.push(this.newAnimal);
+                this.newAnimal = {}
             }
         }
     }
