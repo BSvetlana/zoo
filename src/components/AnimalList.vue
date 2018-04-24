@@ -7,6 +7,7 @@
                     <th scope="col">Animal</th>
                     <th scope="col">Name</th>
                     <th scope="col">Birth</th>
+                    <th>&nbsp;</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -15,6 +16,7 @@
                     <td>{{ animal.name }}</td>
                     <td  v-if="animal.dateOfBrth === ''">Nepoznat</td>
                     <td v-else>{{ animal.dateOfBrth }}</td>
+                    <td><button class="btn btn-secondary btn-sm" @click="removeAnimal(index)">Remove</button></td>
                 </tr>
                 </tbody>
             </table>
@@ -39,6 +41,11 @@
                 }
             }
 
+        },
+        methods: {
+            removeAnimal(index){
+                this.animals.splice(index,1)
+            }
         }
     }
 
