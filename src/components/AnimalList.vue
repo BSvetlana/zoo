@@ -41,29 +41,58 @@
                 </tbody>
             </table>
         </div>
+        <div class="col-md-auto">
+            <table class="table">
+                <thead class="bg-secondary text-white">
+                <tr>
+                    <th scope="col">Surface Name</th>
+                    <th scope="col">Surface</th>
+                    <th>&nbsp;</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr v-for="(sectory, index) in sectors" :key="index">
+                    <td>{{ sectory.name}}</td>
+                    <td>{{ sectory.surface }}</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" @click="viewAlert(sectory.name)">Alert</button>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </template>
 
 <script>
+
+    const sectors = [
+        {name: 'Garden',surface:'Water'},
+        {name: 'Zoo',surface:'Water'},
+        {name: 'Zoo',surface:'Wood'},
+
+    ];
+
     export default {
         name: "AnimalList",
+
         data(){
             return {
                 animals: [
-                    {kind: 'dog', name: 'Rex', dateOfBrth: 2017-10-18},
-                    {kind: 'cat', name: 'Mio', dateOfBrth: 2017-4-18},
-                    {kind: 'dog', name: 'Leo', dateOfBrth: 2016-10-18},
-                    {kind: 'mouse', name: 'Miki', dateOfBrth: ''},
-                    {kind: 'fish', name: 'Bub', dateOfBrth: 2014-10-18},
+                    {kind: 'dog', name: 'Rex', dateOfBrth: 2017-10-18, sector: sectors[0]},
+                    {kind: 'cat', name: 'Mio', dateOfBrth: 2017-4-18, sector: sectors[1]},
+                    {kind: 'dog', name: 'Leo', dateOfBrth: 2016-10-18, sector: sectors[2]},
+                    {kind: 'mouse', name: 'Miki', dateOfBrth: '', sector: sectors[1]},
+                    {kind: 'fish', name: 'Bub', dateOfBrth: 2014-10-18, sector: sectors[0]}
                 ],
                 newAnimal:{
                     kind: '',
                     name: '',
                     dateOfBrth: ''
                 },
-                seen(){
-                    this.animal.dateOfBrth = 'Nepoznat';
-                }
+                sectors: sectors,
+                isDiseble: true
+
             }
 
         },
@@ -79,7 +108,18 @@
             addAnimal(){
                 this.animals.push(this.newAnimal);
                 this.newAnimal = {}
-            }
+            },
+            viewAlert(sector){
+
+                var animalsList = '';
+                for(var i=0; i < this.animals.length; i++) {
+                    if(this.animals[i].sector.name === sector) {
+                        animalsList += this.animals[i].name + ' ';
+                    }
+                }
+                alert(animalsList);
+            },
+
         }
     }
 
