@@ -16,7 +16,10 @@
                     <td>{{ animal.name }}</td>
                     <td  v-if="animal.dateOfBrth === ''">Nepoznat</td>
                     <td v-else>{{ animal.dateOfBrth }}</td>
-                    <td><button class="btn btn-secondary btn-sm" @click="removeAnimal(index)">Remove</button></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" @click="removeAnimal(index)">Remove</button>
+                        <button class="btn btn-secondary btn-sm" @click="moveToTop(animal)">Move Top</button>
+                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -45,6 +48,11 @@
         methods: {
             removeAnimal(index){
                 this.animals.splice(index,1)
+            },
+            moveToTop(animal){
+
+                this.animals.splice(this.animals.indexOf(animal),1);
+                this.animals.unshift(animal);
             }
         }
     }
